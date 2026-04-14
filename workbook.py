@@ -253,13 +253,17 @@ if __name__ == "__main__":
     cell_range = "Membership Database!A3:A84"
 
     # Read the values from the specified sheet and range.
-    values = read_sheet(spreadsheet_id, cell_range)
+    # values = read_sheet(spreadsheet_id, cell_range)
 
-    # If Google returned no values, print a helpful message.
-    if not values:
-        print("No data found.")
+    # # If Google returned no values, print a helpful message.
+    # if not values:
+    #     print("No data found.")
 
-    # Otherwise, print each row one by one.
-    else:
-        for row in values:
-            print(row)
+    # # Otherwise, print each row one by one.
+    # else:
+    #     for row in values:
+    #         print(row)
+
+    # write to the sheet
+    name = 'Lance Kessler'
+    write_sheet(spreadsheet_id, "Membership Database!A86", [[name]])

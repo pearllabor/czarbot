@@ -56,3 +56,25 @@ async def on_message(message):
         await send_message(message.channel, "did I ask?")
 
 client.run(TOKEN)
+
+def labor_preferences():
+    # ========== LABOR PREFERENCES ========== #
+    preferences = workbook.read_sheet(address, "Labor Preferences!A3:AB200")
+    preferences_dict = dict.fromkeys(names, [])
+    # turn preferences into a dataframe
+    preferences_df = pd.DataFrame(preferences[1:], columns=preferences[0])
+    # remove certain columns that we don't need
+    preferences_df = preferences_df.drop(columns=['Hours', 'Name Update', 'Notes', 'Medical Conditions', 'Context'])
+    # populate preferences_dict with each person's preferences, only keeping the most recent form for each person
+    for name in names:
+        preferences_dict[name] = dict.fromkeys(preferences_df.columns, 0)
+        for index, row in preferences_df.iterrows():
+            if row['Name'] == name:
+                # only keep the most recent form for each person, so overwrite the previous one if there are multiple forms
+                if preferences_dict[name]['Time/Exempt'] == 0:
+                    for column in preferences_df.columns[2:]:
+                        preferences_dict[name][column] = row[column]
+                elif datetime.strptime(row['Time/Exempt'], "%m/%d/%Y %H:%M:%S") > datetime.strptime(preferences_dict[name]['Time/Exempt'], "%m/%d/%Y %H:%M:%S"):
+                    for column in preferences_df.columns[2:]:
+                        preferences_dict[name][column] = row[column]
+

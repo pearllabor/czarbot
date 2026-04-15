@@ -5,7 +5,8 @@ import discord_values
 TOKEN = discord_values.get_token()
 
 # id that tells the bot which channel to read and send messages in, should be kept private and not shared
-CHANNEL_ID = discord_values.get_channel_id()['General']  # replace with your channel ID
+CHANNEL_ID_GENERAL = discord_values.get_channel_id()['General']  # replace with your channel ID
+CHANNEL_ID_ANNOUNCEMENTS = discord_values.get_channel_id()['Announcements']  # replace with your channel ID
 
 # tells the bot what to pay attention to. In this case, we want to read message content, so we need to enable that intent.
 intents = discord.Intents.default()
@@ -21,7 +22,7 @@ client = discord.Client(intents=intents)
 async def on_ready():
     print(f"Logged in as {client.user}")
 
-    channel = await client.fetch_channel(CHANNEL_ID)
+    channel = await client.fetch_channel(CHANNEL_ID_ANNOUNCEMENTS)
     print(f"Found channel: {channel}")
 
     found_message = False
@@ -42,7 +43,7 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.channel.id == CHANNEL_ID:
+    if message.channel.id == CHANNEL_ID_GENERAL:
         print("New live message received:")
         print(f"[{message.channel}] {message.author}: {message.content}")
     
@@ -51,7 +52,7 @@ async def on_message(message):
     if message.content == "!ping":
         await send_message(message.channel, "pong!")
 
-    # if message.author.id == 753267835979038883:
-    #     await send_message(message.channel, "huh?")
+    if message.author.id == discord_values.get_member_id()['Joey']:
+        await send_message(message.channel, "did I ask?")
 
 client.run(TOKEN)

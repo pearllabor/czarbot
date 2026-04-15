@@ -239,10 +239,10 @@ if __name__ == "__main__":
     # You can find it in the Google Sheets URL.
     #
     # Example URL:
-    # https://docs.google.com/spreadsheets/d/1PgmAJEswaN4SdxVO1cwBKVGPCd40twRyTOZ3S9lxzLM/edit#gid=0
+    # https://docs.google.com/spreadsheets/d/1Bxmu2iIqNMdsGEVOVE_Loyym3WMRQOPzfU1bzL9uGhg/edit#gid=0
     #
     # The spreadsheet ID is the long string between /d/ and /edit.
-    spreadsheet_id = "1PgmAJEswaN4SdxVO1cwBKVGPCd40twRyTOZ3S9lxzLM"
+    spreadsheet_id = "1Bxmu2iIqNMdsGEVOVE_Loyym3WMRQOPzfU1bzL9uGhg"
 
     # This is the exact range to read, using A1 notation.
     #
@@ -250,7 +250,7 @@ if __name__ == "__main__":
     # "A3:A84" means:
     # - start at column A, row 3
     # - end at column A, row 84
-    cell_range = "Membership Database!A3:A84"
+    #cell_range = "Membership Database!A3:A84"
 
     # Read the values from the specified sheet and range.
     # values = read_sheet(spreadsheet_id, cell_range)
@@ -265,5 +265,5 @@ if __name__ == "__main__":
     #         print(row)
 
     # write to the sheet
-    name = 'Lance Kessler'
-    write_sheet(spreadsheet_id, "Membership Database!A86", [[name]])
+    #name = 'Lance Kessler'
+    #write_sheet(spreadsheet_id, "Membership Database!A86", [[name]])
